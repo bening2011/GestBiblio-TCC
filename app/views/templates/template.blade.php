@@ -3,6 +3,9 @@
 	<title>BiblioGeste</title>
 	{{HTML::script('assets/js/bootstrap.js')}}
 	{{HTML::style('assets/css/bootstrap.css')}}
+  {{HTML::script('assets/js/bootstrap-datepicker.js')}}
+  {{HTML::script('assets/js/jquery-1.11.3.min.js')}}
+  {{HTML::style('assets/css/datepicker.css')}}
 	<link rel="icon" type="image/png" href="/assets/css/logo.png" />
 
 </head>
