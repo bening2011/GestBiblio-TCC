@@ -20,18 +20,29 @@ class EmprestimoController extends BaseController {
 	}
 
 	public function postAdicionar(){
-		$dados = Input::all();
-		$exemplar = new TabelaExemplar($dados);
-		$valida = Validator::make($exemplar->toArray(), $this->rules);
+		$emprestimo = new TabelaEmprestimo();
+		$exememp= new TabelaExemEmp();
+		$usuemp= new TabelaUsuEmp();
+		$emprestimo->id_cliente = Input::get('id_cliente');
+		$emprestimo->data_provavel_devolucao = Input::get('data_provavel_devolucao');
+		$exememp->emprestimo = Input::get('Como pega Esse ??????');
+		$exememp->exemplar = Input::get('endereco');
+		$usuemp->cliente = Input::get('id_cliente');
+		$usuemp->id_emprestimo = Input::get('telefone');
+		$usuemp->usuario = Input::get('pegar pela Seção');
 		
-		if($valida->fails()){
-			return Redirect::to('exemplar/adicionar')
-			->withErrors($valida)
-			->withInput();
-		} 
-		$exemplar->save();
+		//$valida = Validator::make($emprestimo->toArray(), $this->rules);
+		
+		//if($valida->fails()){
+		//	return Redirect::to('emprestimo/adicionar')
+		//	->withErrors($valida)
+		//	->withInput();
+		//} 
+		$emprestimo->save();
+		$usuemp->save();
+		$exememp->save();
 
-		return Redirect::to('exemplar');
+		return Redirect::to('emprestimo');
 	}
 
 	public function getEditar($id_exemplar){

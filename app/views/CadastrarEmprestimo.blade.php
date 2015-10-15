@@ -13,13 +13,13 @@
 	
 <div  class= "col-xs-6 "  >
  			{{Form::open(array('url' => 'emprestimo/adicionar'))}}
-
- 		{{ Form::select('id_cliente', ($clientes=>$clientes)) }}
- 		
+<div class= "dropdown btn btn-default dropdown-toggle">
+ 		{{ Form::select('id_cliente', ($clientes)) }}
+ 		</div>
  		{{"<BR>"}}
 		
  		
- 		{{ Form::select('id_cliente', $exemplares, array('class'=> 'btn btn-default dropdown-toggle')) }} 
+ 		{{ Form::select('id_cliente', $exemplares) }} 
  		{{"<BR>"}}
  		
  		{{Form::text('data_emprestimo','', array('placeholder' =>'Data do Emprestimo', 'class'=> 'form-control'))}}{{"<BR>"}}
