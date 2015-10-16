@@ -12,12 +12,12 @@
 <body>
 	<header>
 		<nav class="navbar navbar-default">
-  <div class="container-fluid">
+  <div class="container-fluid topo">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
     
       <nav class="navbar ">
-  <div class="container-fluid">
+  <div class="container-fluid ">
 
       <a class="logo" href="#">
         <img alt="Brand" src="/assets/css/bibliogest.png">

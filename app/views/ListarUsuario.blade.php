@@ -3,7 +3,7 @@
 @section('content')
 <div><h1> Listar Usuarios</h1></div>
 
-
+<div class="row">
 <div  class= "col-md-4"  >
   {{Form::open(array('url' => 'usuario'))}}
   {{Form::text('lst_busca', '' , array('placeholder' =>'Buscar Usuario', 'class'=> 'form-control '))}}
@@ -11,6 +11,7 @@
 </div>
  {{Form::submit('Buscar', array('class'=> 'btn btn-default '))}}
   {{Form::close()}}
+  </div>
 </form>
 	<table class="table table-striped">
  		<tr>

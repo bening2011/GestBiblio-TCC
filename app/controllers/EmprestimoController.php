@@ -14,7 +14,7 @@ class EmprestimoController extends BaseController {
 
 	public function getAdicionar(){
 		$livros = TabelaLivro::lists('nome_livro', 'id_livro');
-		$exemplares = TabelaExemplar::lists('id_exemplar', 'id_livrodois');
+		$exemplares = TabelaExemplar::lists('id_exemplar', 'id_exemplar');
 		$clientes = TabelaCliente::lists('nome','id_cliente');
 		return View::make('CadastrarEmprestimo', compact('livros', 'exemplares','clientes'));
 	}
@@ -23,13 +23,18 @@ class EmprestimoController extends BaseController {
 		$emprestimo = new TabelaEmprestimo();
 		$exememp= new TabelaExemEmp();
 		$usuemp= new TabelaUsuEmp();
-		$emprestimo->id_cliente = Input::get('id_cliente');
+		$emprestimo->id_clientedois = Input::get('id_cliente');
 		$emprestimo->data_provavel_devolucao = Input::get('data_provavel_devolucao');
-		$exememp->emprestimo = Input::get('Como pega Esse ??????');
-		$exememp->exemplar = Input::get('endereco');
+		$emprestimo->save();
+		
+		$idemprestimo = DB::table('emprestimo')->max('id_emprestimo');
+		
+		$exememp->emprestimo = $idemprestimo;
+		$exememp->exemplar = Input::get('id_exemplar');
+		$exememp->save();
 		$usuemp->cliente = Input::get('id_cliente');
-		$usuemp->id_emprestimo = Input::get('telefone');
-		$usuemp->usuario = Input::get('pegar pela Seção');
+		$usuemp->emprestimo = $idemprestimo;
+		$usuemp->usuario = '12';
 		
 		//$valida = Validator::make($emprestimo->toArray(), $this->rules);
 		
@@ -38,9 +43,8 @@ class EmprestimoController extends BaseController {
 		//	->withErrors($valida)
 		//	->withInput();
 		//} 
-		$emprestimo->save();
+		
 		$usuemp->save();
-		$exememp->save();
 
 		return Redirect::to('emprestimo');
 	}

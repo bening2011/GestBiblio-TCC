@@ -9,6 +9,7 @@ class TabelaExemEmp extends Eloquent {
 	protected $guarded = array('_token');
 	
 	
+	
 	public function exememp(){
 		return $this->hasMany('TabelaExemEmp');
 	}

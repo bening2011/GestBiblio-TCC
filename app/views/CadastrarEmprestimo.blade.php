@@ -27,7 +27,7 @@
  		{{"<BR>"}}
 		
  		
- 		{{ Form::select('id_cliente', $exemplares) }} 
+ 		{{ Form::select('id_exemplar', $exemplares) }} 
  		{{"<BR>"}}
  		
  		{{Form::text('data_emprestimo','', array('placeholder' =>'Data do Emprestimo', 'class'=> 'datepicker'))}}{{"<BR>"}}

@@ -10,7 +10,7 @@ html {
       -ms-text-size-adjust: 100%;
 }
 body {
-  margin: 0;
+  margin: 0 0 65px 0;
   min-width: 420px;
 }
 article,
@@ -1612,6 +1612,11 @@ pre code {
   padding-left: 33px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.topo {
+  overflow: hidden;
+    height: 90px;
 }
 .row {
   margin-right: -15px;
