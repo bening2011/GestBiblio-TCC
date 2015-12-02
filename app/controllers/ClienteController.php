@@ -21,6 +21,13 @@ class ClienteController extends BaseController {
 		return View::make ('ListarCliente', compact('lista'));
 	}
 
+	public function postIndex(){
+    		$buscado = Input::get('lst_busca');
+    		$lista = TabelaCliente::where('nome', 'like', '%'.$buscado.'%')->get();
+    		return View::make('ListarCliente', compact('lista')) ;
+    }
+
+
 	public function getAdicionar(){
 		return View::make('EditorCliente');
 	}

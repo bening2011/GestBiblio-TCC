@@ -1,18 +1,25 @@
 @extends('templates.template')
 
 @section('content')
-<div><h1> Listar Usuarios</h1></div>
+<h1>Listar Usuários</h1>
 
-<div class="row">
+	<div class="row">
 <div  class= "col-md-4"  >
   {{Form::open(array('url' => 'usuario'))}}
-  {{Form::text('lst_busca', '' , array('placeholder' =>'Buscar Usuario', 'class'=> 'form-control '))}}
+  {{Form::text('lst_busca', '' , array('placeholder' =>'Buscar Usuários', 'class'=> 'form-control '))}}
  
 </div>
  {{Form::submit('Buscar', array('class'=> 'btn btn-default '))}}
   {{Form::close()}}
+  
+ 
+<div class="pull-right ">
+	<a href="usuario/adicionar">   
+	<input class="btn btn-primary" type="submit" value="Cadastrar Usuário">
+	</a>
+</div>
   </div>
-</form>
+
 	<table class="table table-striped">
  		<tr>
  			<th>Nome</th>
@@ -23,7 +30,6 @@
  			<th>Telefone</th>
  			<th>Cidade</th>
  			<th>Email</th>
- 			<th>Login</th>
  			<th>Senha</th>
  			<th>Ações</th>
 		</tr>
@@ -38,11 +44,10 @@
  			<td>{{{$usuario->telefone}}}</td>
  			<td>{{{$usuario->cidade}}}</td>
  			<td>{{{$usuario->email}}}</td>
- 			<td>{{{$usuario->login}}}</td>
  			<td>******</td>
- 			<td><a href="usuario/editar/{{{$usuario->id_usuario}}}" title="Editar"><span class='glyphicon glyphicon-pencil'></span></a>
+ 			<td><a href="usuario/editar/{{{$usuario->id}}}" title="Editar"><span class='glyphicon glyphicon-pencil'></span></a>
  				
- 				<a href="usuario/deletar/{{{$usuario->id_usuario}}}" title="Editar"><span class='glyphicon glyphicon-trash'></span></a>	</td>
+ 				<a href="usuario/deletar/{{{$usuario->id}}}" title="Editar"><span class='glyphicon glyphicon-trash'></span></a>	</td>
 		</tr>
 		</tr>
 		@empty
@@ -51,10 +56,6 @@
 		</tr>	
 		 @endforelse
 	</table>
-	<a href="usuario/adicionar">
-       
-      
-	<input class="btn btn-default" type="submit" value="Novo Cadastro">
-	</a>
+	
 	
 @stop

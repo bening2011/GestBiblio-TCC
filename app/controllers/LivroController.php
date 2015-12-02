@@ -3,13 +3,18 @@
 class LivroController extends BaseController {
 
 	
-private $rules = array('nome_autor' =>  'required', 'secao' =>'required', 'edicao' =>'required',
-					   'nome_editora' =>'required', 'ano' =>'required', 'data_entrada' =>'required', 'nome_livro' =>'required');
+private $rules = array('nome_autor' =>  'required', 'secao' =>'required'
+					   , 'nome_livro' =>'required');
 	public function getIndex(){
 		$lista3 = TabelaLivro::get();
 
 		return View::make ('ListarLivro', compact('lista3'));
 	}
+	public function postIndex(){
+    		$buscado = Input::get('lst_busca');
+    		$lista3 = TabelaLivro::where('nome_livro', 'like', '%'.$buscado.'%')->get();
+    		return View::make('ListarLivro', compact('lista3')) ;
+    }
 
 	public function getAdicionar(){
 		return View::make('EditorLivro');
@@ -68,12 +73,6 @@ private $rules = array('nome_autor' =>  'required', 'secao' =>'required', 'edica
 
 	public function MissingMethod($params = array()){
 		return 'Nada encontrado :D';
-	}
-
-	public function getListar()
-	{
-		
-
 	}
 
 }

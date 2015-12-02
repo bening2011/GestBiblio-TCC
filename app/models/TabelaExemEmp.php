@@ -5,7 +5,7 @@ class TabelaExemEmp extends Eloquent {
 
 	protected $table = 'exem-emp';
 	public $timestamps = false;
-	protected $primaryKey = 'id_exem-emp';
+	protected $primaryKey = 'id';
 	protected $guarded = array('_token');
 	
 	

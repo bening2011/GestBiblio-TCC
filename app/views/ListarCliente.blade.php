@@ -1,18 +1,24 @@
 @extends('templates.template')
 
 @section('content')
-Listar clientes
-{{HTML::link('cliente/adicionar','Novo Cadastro')}}
-	<form class="form-inline">
-  <div class="form-group">
-    <label>Buscar</label>
-    <input  class="form-control" name="lst_busca" placeholder="Buscar Cliente">
-  </div>
-  
-  
+<h1>Listar Clientes</h1>
 
-  <button type="submit" class="btn btn-default">Buscar</button>
-</form>
+	<div class="row">
+<div  class= "col-md-4"  >
+  {{Form::open(array('url' => 'cliente'))}}
+  {{Form::text('lst_busca', '' , array('placeholder' =>'Buscar Clientes', 'class'=> 'form-control '))}}
+ 
+</div>
+ {{Form::submit('Buscar', array('class'=> 'btn btn-default '))}}
+  {{Form::close()}}
+  
+ 
+<div class="pull-right ">
+	<a href="cliente/adicionar">   
+	<input class="btn btn-primary" type="submit" value="Cadastrar Cliente">
+	</a>
+</div>
+  </div>
 	<div class="table-responsive">
 	<table class="table table-striped">
  		<tr>
@@ -53,5 +59,8 @@ Listar clientes
 		</tr>		
 		 @endforelse
 	</table>
+	
 </div>
+<br>
+
 @stop

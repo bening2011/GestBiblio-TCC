@@ -16,7 +16,7 @@ class UsuarioController extends BaseController {
 	*/
 private $rules = array('nome' =>  'required', 'cpf' =>array( 'cpf', 'required'), 'rg' =>'required', 'endereco' =>'required',
 					   'estado' =>'required', 'telefone' =>'required', 'cidade' =>'required', 'email' =>'required', 
-					   'senha' =>'required', 'login' =>'required');
+					   'senha' =>'required');
 
 	public function getIndex(){
 		$lista2 = TabelaUsuario::get();
@@ -29,9 +29,18 @@ private $rules = array('nome' =>  'required', 'cpf' =>array( 'cpf', 'required'),
 	}
 
 	public function postAdicionar(){
-		$dados = Input::all();
-		$usuario = new TabelaUsuario($dados);
 		
+		$usuario = new TabelaUsuario();
+		$usuario->nome = Input::get('nome');
+		$usuario->cpf = Input::get('cpf');
+		$usuario->rg = Input::get('rg');
+		$usuario->endereco = Input::get('endereco');
+		$usuario->estado = Input::get('estado');
+		$usuario->telefone = Input::get('telefone');
+		$usuario->cidade = Input::get('cidade');
+		$usuario->email = Input::get('email');
+		$usuario->senha = Hash::make(Input::get('senha'));
+		$usuario->login = 'null';
 		$valida = Validator::make($usuario->toArray(), $this->rules);
 		
 		if($valida->fails()){
@@ -44,16 +53,16 @@ private $rules = array('nome' =>  'required', 'cpf' =>array( 'cpf', 'required'),
 		return Redirect::to('usuario');
 	}
 
-	public function getEditar($id_usuario){
-		$usuarios = DB::table('usuario')->where('id_usuario', $id_usuario)->get();
+	public function getEditar($id){
+		$usuarios = DB::table('usuario')->where('id', $id)->get();
 		$usuarios = $usuarios[0];
 
 				return View::make('EditorUsuario', compact('usuarios')) ;
 	}
 
-	public function postEditar($id_usuario){
+	public function postEditar($id){
 		$dados = Input::all();
-		$usuario = TabelaUsuario::find($id_usuario);
+		$usuario = TabelaUsuario::find($id);
 		$usuario->nome = Input::get('nome');
 		$usuario->cpf = Input::get('cpf');
 		$usuario->rg = Input::get('rg');
@@ -62,13 +71,13 @@ private $rules = array('nome' =>  'required', 'cpf' =>array( 'cpf', 'required'),
 		$usuario->telefone = Input::get('telefone');
 		$usuario->cidade = Input::get('cidade');
 		$usuario->email = Input::get('email');
-		$usuario->senha = Input::get('senha');
+		$usuario->senha = Hash::make(Input::get('senha'));
 		$usuario->login = Input::get('login');
 
 		$valida = Validator::make($usuario->toArray(), $this->rules);
 		
 		if($valida->fails()){
-			return Redirect::to("usuario/editar/{$id_usuario}")
+			return Redirect::to("usuario/editar/{$id}")
 			->withErrors($valida)
 			->withInput();
 		} 
@@ -78,8 +87,8 @@ private $rules = array('nome' =>  'required', 'cpf' =>array( 'cpf', 'required'),
 		return Redirect::to('usuario');
 	}
 
-	public function getDeletar($id_usuario){
-		$deletar = TabelaUsuario::find($id_usuario) ;
+	public function getDeletar($id){
+		$deletar = TabelaUsuario::find($id) ;
 		$deletar->delete();
 
 		return Redirect:: to('usuario');
@@ -112,6 +121,36 @@ private $rules = array('nome' =>  'required', 'cpf' =>array( 'cpf', 'required'),
     		$buscado = Input::get('lst_busca');
     		$lista2 = TabelaUsuario::where('nome', 'like', '%'.$buscado.'%')->get();
     		return View::make('ListarUsuario', compact('lista2')) ;
+    }
+
+    public function getPdf(){
+    	$usuarios = TabelaUsuario::get();
+		
+
+		$fpdf = new Fpdf('L','mm','A4');
+        $fpdf->AddPage();
+        $fpdf->SetFont('Arial','B',14);
+        $i=0;
+        $fpdf->Ln(15);
+        $fpdf->Cell(55,10,'<h1>Nome</h1>');
+        $fpdf->Cell(52,10,'CPF');
+        $fpdf->Cell(65,10,'Telefone');
+        $fpdf->Cell(23,10,'E-Mail');
+        $fpdf->Cell(100,10,'Login', 0, 1, 'C');
+        $fpdf->Ln(10);
+        
+
+        $fpdf->SetFont('Arial','',14);
+       foreach ($usuarios as  $usuario) {
+       		$fpdf->Cell(55,10, $usuario->nome);
+       		$fpdf->Cell(50,10, $usuario->cpf);
+       		$fpdf->Cell(45,10, $usuario->telefone);
+       		$fpdf->Cell(35,10, $usuario->email);
+       		$fpdf->Cell(120,10, $usuario->login, 0, 1, 'C');
+       		
+       }
+		 $fpdf->Output();
+        exit;
     }
 
 }

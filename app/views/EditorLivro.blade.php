@@ -11,27 +11,27 @@
  		<p>{{$mensagem}}</p>
  		@endforeach
  	@endif
-
+<div  class= "col-xs-6 "  >
  	@if ( isset($livros->id_livro) )
  			{{Form::open(array('url' => "livro/editar/$livros->id_livro"))}}
  		@else
  			{{Form::open(array('url' => 'livro/adicionar'))}}
  		@endif
- 		{{Form::text('nome_livro', isset($livros->nome_livro) ? $livros->nome_livro :'', array('placeholder' =>'Nome do Livro'))}}
+ 		<label>Nome do Livro</label>
+ 		{{Form::text('nome_livro', isset($livros->nome_livro) ? $livros->nome_livro :'', array('placeholder' =>'Nome do Livro', 'class'=> 'form-control'))}}
  			{{"<BR>"}}
- 		{{Form::text('nome_autor', isset($livros->nome_autor) ? $livros->nome_autor :'', array('placeholder' =>'Nome do Autor'))}}
+ 		<label>Nome do Autor</label>
+ 		{{Form::text('nome_autor', isset($livros->nome_autor) ? $livros->nome_autor :'', array('placeholder' =>'Nome do Autor', 'class'=> 'form-control'))}}
  			{{"<BR>"}}
- 		{{Form::text('edicao', isset($livros->edicao) ? $livros->edicao :'', array('placeholder' =>'Edição'))}}
+ 		<label>Nome da Editora</label>
+ 		{{Form::text('nome_editora', isset($livros->nome_editora) ? $livros->nome_editora :'', array('placeholder' =>'Nome da Editora', 'class'=> 'form-control'))}}
  			{{"<BR>"}}
- 		{{Form::text('nome_editora', isset($livros->nome_editora) ? $livros->nome_editora :'', array('placeholder' =>'Nome da Editora'))}}
- 			{{"<BR>"}}
- 		{{Form::text('ano', isset($livros->ano) ? $livros->ano :'', array('placeholder' =>'Ano'))}}
- 			{{"<BR>"}}
- 		{{Form::text('data_entrada', isset($livros->data_entrada) ? $livros->data_entrada :'', array('placeholder' =>'Data de Entrada'))}}
- 			{{"<BR>"}}
- 		{{Form::text('secao', isset($livros->secao) ? $livros->secao :'', array('placeholder' =>'Seção'))}}
+ 		
+ 		<label>Seção</label>
+ 		{{Form::text('secao', isset($livros->secao) ? $livros->secao :'', array('placeholder' =>'Seção', 'class'=> 'form-control'))}}
  			{{"<BR>"}}
  			{{"<BR>"}}
- 		{{Form::submit('Submeter')}}
+ 		{{Form::submit('Submeter', array('class'=> 'btn btn-default'))}}
  	{{Form::close()}}
+ </div>
 @stop

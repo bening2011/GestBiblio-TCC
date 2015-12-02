@@ -267,6 +267,9 @@ th {
   src: url('../fonts/glyphicons-halflings-regular.eot');
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
+.hidden {
+    display: none;
+}
 .glyphicon {
   position: relative;
   top: 1px;
@@ -3132,18 +3135,18 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
+  background-color: #0000ff;
   border-color: #2e6da4;
 }
 .btn-primary:focus,
 .btn-primary.focus {
-  color: #fff;
+  color: #000fff;
   background-color: #286090;
   border-color: #122b40;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #286090;
+  background-color: #0000FF;
   border-color: #204d74;
 }
 .btn-primary:active,
@@ -6819,4 +6822,76 @@ footer{
     border: 1px;
     border-color: #e7e7e7;
     height:45px;
+}
+
+.collapse-custom {
+
+  .navbar-tool {
+    display: none; 
+  }
+
+  .navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    cursor: pointer;
+    border-bottom: none;
+
+    .btn-xs {
+      font-size: inherit;
+    }
+    li ul {
+      list-style-type: none;
+      padding-left: 15px;
+    }
+
+  }
+
+  .navbar:last-of-type {
+    border-bottom: 1px solid #e7e7e7;
+
+  }
+
+  .navbar-heading {
+    background-color: #3276b1;
+    cursor: default;
+    font-weight: bold;
+    font-size: 16px;
+    li {  
+      padding: 10px 0 10px 0;  
+    }
+    li a {
+      color: #fff;
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  .navbar-nav {
+    .one {
+      min-width: 120px;
+    }
+    .two {
+      min-width: 300px;
+    } 
+    .three {
+      min-width: 75px;
+    }
+    .four {
+      min-width: 110px;
+    } 
+    .five {
+      width: 20px; 
+    }
+  }
+
+  .collapse {
+    background-color: #fff; 
+  }
+
+  .collapse-open {
+    background-color: #f5f5f5; 
+  }
+
+
 }

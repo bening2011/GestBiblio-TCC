@@ -10,33 +10,41 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::get('/',
+        array(
+            'as' => 'home', 
+            'uses' => 'HomeController@getIndex'
+            )
+        );
 
+Route::get('entrar', 'HomeController@getEntrar');
+Route::post('entrar', 'HomeController@postEntrar');
+Route::get('sair', 'HomeController@getSair');
 
 Route::when('*', 'csrf',  array('POST'));
+
+Route::group(array('before' => 'auth'), function()
+{
 
 Route::controller('cliente', 'ClienteController');
 
 Route::controller('exemplar', 'ExemplarController');
-
+Route::group(array('before' => 'auth.admin'), function()
+    {
+Route::controller('relatorio', 'RelatorioController');
 Route::controller('usuario', 'UsuarioController');
-
+Route::controller('pdf', 'FpdfController');
+});
 Route::controller('livro', 'LivroController');
 
 Route::controller('emprestimo', 'EmprestimoController');
-
-Route::get('/', function(){
-	return View::make('login');
+Route::get('/home', function()
+    {
+        return View::make ('home');
+    });
 });
-//
 
-// Confide routes
-Route::get('users/create', 'UsersController@create');
-Route::post('users', 'UsersController@store');
-Route::get('users/login', 'UsersController@login');
-Route::post('users/login', 'UsersController@doLogin');
-Route::get('users/confirm/{code}', 'UsersController@confirm');
-Route::get('users/forgot_password', 'UsersController@forgotPassword');
-Route::post('users/forgot_password', 'UsersController@doForgotPassword');
-Route::get('users/reset_password/{token}', 'UsersController@resetPassword');
-Route::post('users/reset_password', 'UsersController@doResetPassword');
-Route::get('users/logout', 'UsersController@logout');
+
+
+
+
